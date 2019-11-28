@@ -1,0 +1,102 @@
+#!/usr/bin/env python3
+
+import requests
+import json
+import sys
+import socket
+
+ip = (socket.gethostbyname(''))
+url = 'http:/'+ip+':5000/Tarefa'
+print("mandando requisição para: ",url)
+
+def help():
+	print('''
+		Para ajuda:
+		./tarefa ajuda
+
+		Para listar as tarefas:
+		./tarefa listar
+
+		Para adicionar tarefas:
+		./tarefa adicionar <"titulo"> <"descricao">
+
+		Para buscar tarefas:
+		./tarefa buscar <id tarefa>
+
+		Para apagar tarefa:
+		./tarefa apagar <id tarefa>
+
+		Para atualizar tarefa:
+		./tarefa atualizar <id tarefa> <"titulo"> <"descricao">
+		''')
+
+def lista_tarefas():
+	r = requests.get(url)
+	print(r.json())
+
+def adiciona_tarefa(titulo, descricao):
+	nova_tarefa = {'titulo':titulo,'descricao':descricao}
+	r = requests.post(url, json=nova_tarefa)
+	print("Tarefa Adicionada: \n", r.json())
+
+def busca_tarefa(id_tarefa):
+	url_tarefa = url+'/'+str(id_tarefa)
+	r = requests.get(url_tarefa)
+	print(r.json())
+
+def apaga_tarefa(id_tarefa):
+	url_tarefa = url+'/'+str(id_tarefa)
+	r = requests.delete(url_tarefa)
+	print("Tarefa Apagada!")
+
+def atualiza_tarefa(id_tarefa, titulo, descricao):
+	url_tarefa = url+'/'+str(id_tarefa)
+	edita_tarefa = {"titulo":titulo,"descricao":descricao}
+	r = requests.put(url_tarefa, json=(edita_tarefa))
+	print("Tarefa Atualizada: \n", r.json())
+
+if __name__ == "__main__":
+	help()
+	if sys.argv[1] == 'ajuda':
+		help()
+
+	if sys.argv[1] == 'listar':
+		lista_tarefas()
+
+	elif sys.argv[1] == 'adicionar':
+		if len(sys.argv) == 4:
+			titulo = sys.argv[2]
+			descricao = sys.argv[3]
+			adiciona_tarefa(titulo, descricao)
+		else:
+			print("Quantidade de argumentos inválida")
+			help()
+
+	elif sys.argv[1] == 'buscar':
+		if len(sys.argv) == 3:
+			id_tarefa = sys.argv[2]
+			busca_tarefa(id_tarefa)
+		else:
+			print("Quantidade de argumentos inválida")
+			help()
+
+	elif sys.argv[1] == 'apagar':
+		if len(sys.argv) == 3:
+			id_tarefa = sys.argv[2]
+			apaga_tarefa(id_tarefa)
+		else:
+			print("Quantidade de argumentos inválida")
+			help()
+	elif sys.argv[1] == 'atualizar':
+		if len(sys.argv) == 5:
+			id_tarefa = sys.argv[2]
+			titulo = sys.argv[3]
+			descricao = sys.argv[4]
+			atualiza_tarefa(id_tarefa, titulo, descricao)
+		else:
+			print("Quantidade de argumentos inválida")
+			help()
+	else:
+		print("Comando inválido")
+		help()
+		
