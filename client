@@ -6,7 +6,7 @@ import sys
 import socket
 
 ip = (socket.gethostbyname(''))
-url = 'http:/'+ip+':5000/Tarefa'
+url = 'http://'+ip+':5000/Tarefa'
 print("mandando requisição para: ",url)
 
 def help():

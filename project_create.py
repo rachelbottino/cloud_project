@@ -167,3 +167,14 @@ el_client.register_instances_with_load_balancer(
 )
 
 print("Load Balancer: ", load_balancer)
+
+el.client.configure_health_check(
+    LoadBalancerName=load_balancer_name,
+    HealthCheck={
+        'Target': 'TCP:5000',
+        'Interval': 5,
+        'Timeout': 30,
+        'UnhealthyThreshold': 2,
+        'HealthyThreshold': 10
+    }
+)
