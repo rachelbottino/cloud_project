@@ -13,7 +13,7 @@ app = Flask(__name__, static_url_path="")
 
 #MySQL
 mydb = mysql.connector.connect(
-  host="localhost",
+  host="",
   user="user_db",
   passwd="cloud",
   database="projeto",

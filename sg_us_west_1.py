@@ -2,7 +2,7 @@ import boto3
 from aws_creator import *
 
 #Cria client e resource do EC2
-ec2_client = boto3.client('ec2')
+ec2_client = boto3.client('ec2', region_name='us-west-1')
 
 #Security Groups IDs
 id_sg_db_file = open("sg_db.txt","r")

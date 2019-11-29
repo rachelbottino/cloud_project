@@ -2,12 +2,12 @@ import boto3
 from aws_creator import *
 
 #Cria client e resource do EC2
-ec2_client = boto3.client('ec2')
-ec2_resource = boto3.resource('ec2')
+ec2_client = boto3.client('ec2', region_name='us-west-1')
+ec2_resource = boto3.resource('ec2', region_name='us-west-1')
 
 #Variáveis da Key Pair
-key_name = 'aps_key'
-key_material = 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7paB0p4W2sLpFsvO6kclfh3zZ7IFwkZu/azBhmHUSDaczKNTjSps2J4/TC2UrGzI/1zVKhH4h0qHu5yLhPn1c5tOWpv2yXik9WJjKBJkUZYTa9iy0CCNmrL59jDYp1IK3C33EMY2wowhaIE0gQBTPJQb+z2WmJxiTRPK11kMggkc82E2OfjztfThIx1GE6m4HB2tlvsW7M0Gxie5ramXYNebm4n5rQaHEL8EhBejW91e2KrtRejLsCBcRZBYtxXtENwgIDqOaJ/GwIU3q5yulEA0zTQSrC2C0I6l/6KLg++VkkYBC4WfRToGrk6l9DfB+EzKEV46xQbQ7aML6xcN9 imported-openssh-key'
+key_name = ''
+key_material = ''
 
 #Ubuntu 18 image id para North-California
 image_id = 'ami-0dd655843c87b6930'
